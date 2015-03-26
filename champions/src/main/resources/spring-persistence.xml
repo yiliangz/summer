@@ -14,7 +14,7 @@
 			"classpath*:application.properties,classpath*:jdbc.properties"/>
 
 	<!-- 数据源配置, 使用Tomcat JDBC连接池 -->
-	<bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 		<!-- 数据库基本信息配置 -->
 		<property name="driverClassName" value="${jdbc.driver}" />
 		<property name="url" value="${jdbc.url}" />
@@ -32,11 +32,15 @@
 		<property name="maxWait" value="${druid.maxWait}" />
 	</bean>
 
+	<!--<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">-->
+		<!--<constructor-arg ref="dataSourceSpied" />-->
+	<!--</bean>-->
+
 	<context:component-scan base-package="com.summer"/>
 
 	<bean id="sessionFactory"
 		  class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<property name="dataSource" ref="druidDataSource"/>
+		<property name="dataSource" ref="dataSource"/>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>

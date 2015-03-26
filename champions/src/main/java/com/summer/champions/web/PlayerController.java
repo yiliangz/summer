@@ -16,7 +16,6 @@ import javax.annotation.Resource;
 @RequestMapping(value = "/player")
 public class PlayerController {
 
-
     @Resource
     protected PlayerRepository playerRepository;
 
@@ -27,4 +26,10 @@ public class PlayerController {
         return playerRepository.get(id);
     }
 
+    @RequestMapping(value = "/all")
+    @ResponseBody
+    public Object getAll() {
+        DateUtils.getYesterdayStart();
+        return playerRepository.getAll();
+    }
 }
