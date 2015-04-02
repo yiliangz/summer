@@ -14,7 +14,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "PLAYER")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Player extends IdEntity{
 
     public String name;

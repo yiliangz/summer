@@ -28,6 +28,20 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
+    <!-- OpenSessionInView过滤器 -->
+    <!--<filter>-->
+        <!--<filter-name>OpenSessionInViewFilter</filter-name>-->
+        <!--<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>-->
+        <!--<init-param>-->
+            <!--<param-name>flushMode</param-name>-->
+            <!--<param-value>AUTO</param-value>-->
+        <!--</init-param>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>OpenSessionInViewFilter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+
     <!-- filter -->
     <filter>
         <filter-name>encodingFilter</filter-name>
@@ -66,5 +80,7 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+
+
 
 </web-app>

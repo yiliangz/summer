@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Allen on 2015/3/24.
  */
-public interface CrudRepository <PK extends Serializable,T extends IdEntity> {
+public interface CrudRepository <T extends IdEntity,PK extends Serializable> {
 
     public T get(PK id);
 
@@ -17,5 +17,7 @@ public interface CrudRepository <PK extends Serializable,T extends IdEntity> {
     public void delete(PK id);
 
     public List<T> getAll();
+
+    public List<T> query(String sql,Object[] params);
 
 }
