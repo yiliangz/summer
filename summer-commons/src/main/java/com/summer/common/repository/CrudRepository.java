@@ -12,7 +12,11 @@ public interface CrudRepository <T extends IdEntity,PK extends Serializable> {
 
     public T get(PK id);
 
+    public T load(PK id);
+
     public T save(T entity);
+
+    public void update(T entity);
 
     public void delete(PK id);
 

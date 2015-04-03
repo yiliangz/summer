@@ -1,16 +1,13 @@
 package com.summer.common.repository;
 
-import com.summer.common.annotation.MyBatisRepository;
 import com.summer.common.domain.IdEntity;
 import com.summer.common.utils.ReflectionUtils;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
-import org.springframework.stereotype.Repository;
 
-import javax.annotation.Resource;
-import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
@@ -25,8 +22,6 @@ public class CrudRepositoryImpl
     @Autowired
     protected SessionFactory sessionFactory;
 
-    protected HibernateTemplate hibernateTemplate;
-
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
@@ -39,19 +34,12 @@ public class CrudRepositoryImpl
         return sessionFactory.getCurrentSession();
     }
 
-    protected HibernateTemplate getHibernateTemplate() {
-        if (hibernateTemplate == null) {
-            hibernateTemplate = new HibernateTemplate(sessionFactory);
-        }
-//        hibernateTemplate.setCheckWriteOperations(false);
-        return hibernateTemplate;
+    public T get(PK id) {
+        return (T)getCurrentSession().get(entityClass,id);
     }
 
-    public T get(PK id) {
-        return getHibernateTemplate().get(entityClass,id);
-    }
     public T load(PK id) {
-        return getHibernateTemplate().load(entityClass,id);
+        return (T)getCurrentSession().load(entityClass,id);
     }
 
     @Override
@@ -61,21 +49,28 @@ public class CrudRepositoryImpl
     }
 
     @Override
+    public void update(T entity) {
+        getCurrentSession().save(entity);
+    }
+
+    @Override
     public void delete(PK id) {
-        hibernateTemplate = getHibernateTemplate();
-        Session sesison = sessionFactory.getCurrentSession();
-        Object entity = sesison.get(entityClass, (Long) id);
-        sesison.delete(entity);
+        Session session = getCurrentSession();
+        session.delete(session.load(entityClass, (Long) id));
     }
 
     @Override
     public List<T> getAll() {
-        return null;
+        return getCurrentSession().createCriteria(entityClass).list();
     }
 
     @Override
     public List<T> query(String sql, Object[] params) {
-        return null;
+        Query query = getCurrentSession().createQuery(sql);
+        for (int i = 0; params != null && i < params.length; i++) {
+            query.setParameter(i,params[i]);
+        }
+        return query.list();
     }
 
 }

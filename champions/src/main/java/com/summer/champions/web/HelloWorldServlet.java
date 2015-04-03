@@ -35,20 +35,7 @@ public class HelloWorldServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("SessionFactorySessionFactorySessionFactorySessionFactory...");
-//        System.out.println(SpringContextUtils.getBean(SessionFactory.class));
-
-//        ApplicationContext ctx =
-//                new ClassPathXmlApplicationContext("applicationContext.xml");
-//        SessionFactory sf = (SessionFactory)ctx.getBean("sessionFactory");
-//        Session session = sf.openSession();
-//        Player player = new Player();
-//        player.setName("Curry");
-//        session.save(player);
-//
-//        session.save(new Team());
-//        WebApplicationContextUtils.get
         playerRepository.get(7L);
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

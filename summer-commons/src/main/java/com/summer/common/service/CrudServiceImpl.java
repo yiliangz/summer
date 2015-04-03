@@ -1,39 +1,40 @@
 package com.summer.common.service;
 
 import com.summer.common.domain.IdEntity;
+import com.summer.common.repository.CrudRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Allen on 2015/4/1.
  */
-public class CrudServiceImpl<T extends IdEntity,PK extends Serializable>
+public abstract class CrudServiceImpl<T extends IdEntity,PK extends Serializable>
         implements CrudService<T,PK> {
 
-//    @Autowired
-//    protected CrudRepository<T,PK> crudRepository;
+    @Resource
+    public CrudRepository<T,PK> crudRepository;
 
     @Override
     public T get(PK id) {
-//        T entity = crudRepository.get(id);
-//        return entity;
-        return null;
+        return crudRepository.get(id);
     }
 
     @Override
     public T save(T entity) {
-        return null;
+        return crudRepository.save(entity);
     }
 
     @Override
     public void delete(PK id) {
-
+        crudRepository.delete(id);
     }
 
     @Override
     public List<T> getAll() {
-        return null;
+        return crudRepository.getAll();
     }
 
     @Override
