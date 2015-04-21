@@ -39,7 +39,7 @@ public abstract class CrudServiceImpl<T extends IdEntity,PK extends Serializable
 
     @Override
     public List<T> query(String sql, Object[] params) {
-        return null;
+        return crudRepository.query(sql,params);
     }
 
 }

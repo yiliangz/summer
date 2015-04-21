@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
@@ -41,7 +42,9 @@ public abstract class CrudController <T extends IdEntity,PK extends Serializable
      * 按id删除对象
      * @param id
      */
-    @RequestMapping(value = "/delete/{id}")
+    @RequestMapping(value = "/delete/{id}",
+            method = RequestMethod.DELETE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public void delete(@PathVariable PK id) {
         crudService.delete(id);

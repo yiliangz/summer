@@ -16,6 +16,7 @@
         <module>summer-parent</module>
         <module>summer-config</module>
         <module>summer-commons</module>
+        <module>summer-spider</module>
         <module>champions</module>
     </modules>
 

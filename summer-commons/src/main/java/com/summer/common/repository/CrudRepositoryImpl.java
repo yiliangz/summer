@@ -1,12 +1,14 @@
 package com.summer.common.repository;
 
 import com.summer.common.domain.IdEntity;
+import com.summer.common.domain.Phone;
 import com.summer.common.utils.ReflectionUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -44,8 +46,9 @@ public class CrudRepositoryImpl
 
     @Override
     public T save(T entity) {
-        getCurrentSession().save(entity);
-        return entity;
+//        getCurrentSession().save(entity);
+        getCurrentSession().save(new Phone());
+        return null;
     }
 
     @Override
@@ -55,8 +58,15 @@ public class CrudRepositoryImpl
 
     @Override
     public void delete(PK id) {
-        Session session = getCurrentSession();
-        session.delete(session.load(entityClass, (Long) id));
+//        Session session = getCurrentSession();
+//        System.out.println("xxeeeee");
+//        session.delete(session.get(entityClass, (Long) id));
+
+
+        Phone phone  = new Phone();
+        phone.setName("first");
+        getCurrentSession().save(phone);
+
     }
 
     @Override

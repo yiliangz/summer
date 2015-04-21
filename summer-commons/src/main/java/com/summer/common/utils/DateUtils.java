@@ -18,7 +18,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class DateUtils extends org.apache.commons.lang3.time.DateUtils{
 
-    private static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+    public static final String NO_ZERO_DATE_FORMAT = "yyyy-m-d";
 
     private static String[] parsePatterns = { "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm",
             "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm" };
@@ -34,7 +36,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils{
         return (int) (DateTimeUtils.currentTimeMillis() / DateTimeConstants.MILLIS_PER_SECOND);
     }
 
-    public static int getCurentHour() {
+    public static int getCurrentHour() {
         return DateTime.now().hourOfDay().get();
     }
 
@@ -211,16 +213,16 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils{
      * { "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm",
      *   "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm" }
      */
-    public static Date parseDate(Object str) {
-        if (str == null){
-            return null;
-        }
-        try {
-            return parseDate(str.toString(), parsePatterns);
-        } catch (ParseException e) {
-            return null;
-        }
-    }
+//    public static Date parseDate(Object str) {
+//        if (str == null){
+//            return null;
+//        }
+//        try {
+//            return parseDate(str.toString(), parsePatterns);
+//        } catch (ParseException e) {
+//            return null;
+//        }
+//    }
 
     /**
      * 获取过去的天数
@@ -288,4 +290,9 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils{
         dt = dt.plusDays(day);
         return dt.toDate();
     }
+
+    public static Date parseNoZeroDate(String date) throws ParseException {
+        return DateUtils.parseDate(date,DateUtils.NO_ZERO_DATE_FORMAT);
+    }
+
 }
