@@ -2,13 +2,16 @@ package com.summer.spider.parser;
 
 import com.google.common.collect.Lists;
 import com.summer.common.utils.DateUtils;
+import com.summer.common.utils.IOStreamUtils;
 import com.summer.common.utils.RegexUtils;
 import com.summer.spider.domain.Coach;
 import com.summer.spider.domain.Player;
 import com.summer.spider.domain.Team;
+import com.summer.spider.utils.FilePathUtils;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.File;
 import java.text.ParseException;
 import java.util.List;
 
@@ -26,7 +29,6 @@ public class TeamParser extends HtmlParser{
     @Override
     public void parse() {
         ParseTeam();
-        parseCoach();
         parsePlayers();
     }
 
@@ -41,15 +43,22 @@ public class TeamParser extends HtmlParser{
         team.setArena(brief.eq(9).select("td:eq(1)").html());
         team.setChampions(getLong(brief.eq(11).select("td:eq(1)").html()));
         team.setJoinYear(getLong(brief.eq(10).select("td:eq(1)").html()));
+
+        Elements coachElement = brief.eq(1).select("td").eq(2);
+        parseCoach(team.getEnglishName(),coachElement);
     }
 
-    public void parseCoach() {
-
+    public void parseCoach(String teamName,Elements coachElement) {
+        System.out.println(coachElement.html());
+        System.out.println(FilePathUtils.getPrefixImagePath()+"/team/coach/");
+        String filePath = FilePathUtils.getPrefixImagePath()+"/team/coach/" + teamName + ".jpg";
+        filePath = filePath.replaceAll("\\s","_").toLowerCase();
+        IOStreamUtils.saveFile(coachElement.select("img").attr("src"),filePath);
     }
 
     public void parsePlayers() {
         Elements roster = getContent().select("#left > #table730middle").eq(1).select("tbody > tr:gt(0)");
-        for (int i = 0; i < roster.size(); i++) {
+        for (int i = 0; i < roster.size()&&i<18; i++) {
             Player player = new Player();
             Element playerElement = roster.get(i);
             player.setUrl(playerElement.select("td:eq(1) a").attr("href"));
@@ -62,7 +71,30 @@ public class TeamParser extends HtmlParser{
             player.setNbaBallAge(getLong(playerElement.select("td:eq(7)").html()));
             players.add(player);
         }
-        System.out.println(roster.outerHtml());
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public Coach getCoach() {
+        return coach;
+    }
+
+    public void setCoach(Coach coach) {
+        this.coach = coach;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
 }

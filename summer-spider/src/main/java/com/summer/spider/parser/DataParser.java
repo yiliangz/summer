@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by Allen on 2015/4/20.
  */
-public interface DateParser {
+public interface DataParser {
 
     public Long getLong(String data);
 

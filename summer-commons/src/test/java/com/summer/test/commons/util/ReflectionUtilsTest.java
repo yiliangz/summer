@@ -17,8 +17,6 @@ public class ReflectionUtilsTest {
 
     @Test
     public void test() {
-        System.out.println("xxxxx");
-//        ReflectionUtils.getSuperClassGenricType()
         Teacher teacher = new Teacher();
     }
 

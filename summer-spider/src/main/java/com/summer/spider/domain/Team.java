@@ -26,6 +26,9 @@ public class Team extends NamedEntity {
 
     private long joinYear;
 
+    /* 英文缩写 */
+    private String abbr;
+
     public Division getDivision() {
         return division;
     }

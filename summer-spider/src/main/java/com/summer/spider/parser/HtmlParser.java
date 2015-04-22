@@ -1,6 +1,8 @@
 package com.summer.spider.parser;
 
+import com.summer.common.domain.EncodingConstant;
 import com.summer.common.utils.DateUtils;
+import com.summer.common.utils.HttpUrlContextUtils;
 import com.summer.common.utils.RegexUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
@@ -11,7 +13,7 @@ import java.util.Date;
 /**
  * Created by Allen on 2015/4/17.
  */
-public class HtmlParser implements DateParser {
+public abstract class HtmlParser implements DataParser {
 
     Element content;
 
@@ -29,9 +31,25 @@ public class HtmlParser implements DateParser {
         return this;
     }
 
-    public HtmlParser init(String html,String selector) {
+    public HtmlParser init(String html, String selector) {
         this.content = Jsoup.parse(html).select(selector).first();
         return this;
+    }
+
+
+    /**
+     * 按encoding参数的格式从url中读取
+     * */
+    public HtmlParser load(String url, String encoding) {
+        this.content = Jsoup.parse(HttpUrlContextUtils.getResponseText(url,null,encoding));
+        return this;
+    }
+
+    /**
+     * 按gb2312的encoding的格式从url中读取
+     * */
+    public HtmlParser loadByGbEncoding(String url) {
+        return load(url, EncodingConstant.GB_ENCODING);
     }
 
     public Element getContent() {

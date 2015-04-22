@@ -26,11 +26,11 @@ public class HttpUrlContextUtils {
      * @return
      * @throws Exception
      */
-    public static String getResponseText(String path,String params, String encoding) throws Exception{
+    public static String getResponseText(String path,String params, String encoding) {
         return HttpUrlContextUtils.getResponse(path, RequestType.GET, params, encoding);
     }
 
-    public static String postResponseText(String path,String params, String encoding) throws Exception{
+    public static String postResponseText(String path,String params, String encoding) {
         return HttpUrlContextUtils.getResponse(path, RequestType.POST, params, encoding);
     }
 

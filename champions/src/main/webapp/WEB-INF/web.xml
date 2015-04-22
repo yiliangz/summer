@@ -8,7 +8,9 @@
     <!-- context -->
     <context-param>
         <param-name>log4jConfigLocation</param-name>
-        <param-value>/WEB-INF/classes/log4j.properties</param-value>
+        <!-- 为了junit的测试把log4j.properties放在web-info中 -->
+        <!-- 也可放在maven的resource里:  /WEB-INF/classes/log4j.properties  -->
+        <param-value>/WEB-INF/log4j.properties</param-value>
     </context-param>
     <!--<context-param>-->
         <!--<param-name>log4jRefreshInterval</param-name>-->

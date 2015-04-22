@@ -1,12 +1,8 @@
 package com.summer.test.spider.parser;
 
 import com.summer.common.utils.HttpUrlContextUtils;
-import com.summer.common.utils.RegexUtils;
-import com.summer.spider.domain.Team;
-import com.summer.spider.parser.CssSelector;
 import com.summer.spider.parser.HtmlParser;
 import com.summer.spider.parser.TeamParser;
-import org.jsoup.nodes.Element;
 import org.junit.Test;
 
 /**
@@ -14,11 +10,22 @@ import org.junit.Test;
  */
 public class TeamParserTest {
 
-    @Test
-    public void parse() {
-//        String result = HttpUrlContextUtils.getResponseText("http://nba.sports.sina.com.cn/team/Spurs.shtml", null, "gb2312");
-        HtmlParser parser = new TeamParser().init(HtmlContext.getTeamHtml());
+
+    public void parse(String html) {
+        HtmlParser parser = new TeamParser().init(html);
         parser.parse();
+    }
+
+    @Test
+    public void parseViaArchive() throws Exception {
+        String result = HtmlContext.getTeamHtml();
+        parse(result);
+    }
+
+    @Test
+    public void parseViaHttp() throws Exception {
+        String result = HttpUrlContextUtils.getResponseText("http://nba.sports.sina.com.cn/team/Spurs.shtml", null, "gb2312");
+
     }
 
 }

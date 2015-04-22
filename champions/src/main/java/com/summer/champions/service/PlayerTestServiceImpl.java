@@ -22,14 +22,14 @@ public class PlayerTestServiceImpl implements PlayerTestService {
         return sessionFactory.getCurrentSession();
     }
 
-    @Transactional
     public void save() {
         Session session = getCurrentSession();
-        session.get(Player.class,2L);
-        Player player = new Player();
-        Player player1 = new Player();
-        session.save(player);
-        session.save(player1);
+//        session.get(Player.class,2L);
+//        Player player = new Player();
+//        Player player1 = new Player();
+//        session.save(player);
+//        session.save(player1);
+        session.delete(session.load(Player.class, 46L));
     }
 
 }

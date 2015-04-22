@@ -28,13 +28,26 @@ public class IOStreamUtils {
     }
 
     public static void saveByteFile(byte[] bytes,String filePath) throws IOException {
-        FileOutputStream outStream = new FileOutputStream(filePath);
-        outStream.write(bytes);
-        outStream.close();
+        FileOutputStream outStream = null;
+        try {
+            File file = new File(filePath);
+            outStream = new FileOutputStream(file);
+            outStream.write(bytes);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }finally {
+            if (outStream != null) {
+                outStream.close();
+            }
+        }
     }
 
-    public static void saveFile(String urlPath,String filePath) throws Exception {
-        saveByteFile(HttpUrlContextUtils.getResponseBytes(urlPath),filePath);
+    public static void saveFile(String urlPath,String filePath)  {
+        try {
+            saveByteFile(HttpUrlContextUtils.getResponseBytes(urlPath),filePath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static String readTxtFile(String filePath,String encoding) {
