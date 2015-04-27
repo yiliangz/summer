@@ -47,7 +47,7 @@
                     <jvmArgs>-Xmx512m -XX:PermSize=128m -XX:MaxPermSize=256m
                         -Dfile.encoding=UTF-8</jvmArgs>
                     <webAppConfig>
-                        <contextPath>/${project.artifactId}</contextPath>
+                        <contextPath>/</contextPath>
                         <tempDirectory>${project.build.directory}/jetty_debug</tempDirectory>
                         <defaultsDescriptor>src/test/resources/webdefault.xml</defaultsDescriptor>
                     </webAppConfig>

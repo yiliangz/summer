@@ -6,10 +6,12 @@
     <script src="js/jquery-1.11.1.js" type="text/javascript">
     </script>
     <script type="text/javascript">
-        var params = {"name": "xxxx"};
+        var params = {"name": "name",address:"eesss"};
         $.ajax({
-            url:"http://localhost:8080/champions/test/delete/36",
-            type:"post",
+            url:"/player/all",
+            type:"get",
+            contentType: "application/json",
+            data:JSON.stringify(params),
             dataType:"json",
             success: function(){
 

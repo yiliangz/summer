@@ -46,27 +46,18 @@ public class CrudRepositoryImpl
 
     @Override
     public T save(T entity) {
-//        getCurrentSession().save(entity);
-        getCurrentSession().save(new Phone());
-        return null;
+        getCurrentSession().save(entity);
+        return entity;
     }
 
     @Override
     public void update(T entity) {
-        getCurrentSession().save(entity);
+        getCurrentSession().saveOrUpdate(entity);
     }
 
     @Override
     public void delete(PK id) {
-//        Session session = getCurrentSession();
-//        System.out.println("xxeeeee");
-//        session.delete(session.get(entityClass, (Long) id));
-
-
-        Phone phone  = new Phone();
-        phone.setName("first");
-        getCurrentSession().save(phone);
-
+        getCurrentSession().delete(get(id));
     }
 
     @Override

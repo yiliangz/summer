@@ -2,11 +2,15 @@ package com.summer.common.service;
 
 import com.summer.common.domain.IdEntity;
 import com.summer.common.repository.CrudRepository;
+import com.summer.common.utils.ReflectionUtils;
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Allen on 2015/4/1.
@@ -25,6 +29,25 @@ public abstract class CrudServiceImpl<T extends IdEntity,PK extends Serializable
     @Override
     public T save(T entity) {
         return crudRepository.save(entity);
+    }
+
+    @Override
+    public void update(T entity) {
+        crudRepository.update(entity);
+    }
+
+    @Override
+    public void update(PK id,Map<String,String> entityMap) {
+        T entity = get(id);
+        try {
+            BeanUtils.copyProperties(entity,entityMap);
+            crudRepository.update(entity);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        crudRepository.update(entity);
     }
 
     @Override
