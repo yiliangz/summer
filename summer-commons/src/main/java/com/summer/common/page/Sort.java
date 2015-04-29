@@ -1,4 +1,4 @@
-package com.summer.common.domain.page;
+package com.summer.common.page;
 
 import java.util.List;
 

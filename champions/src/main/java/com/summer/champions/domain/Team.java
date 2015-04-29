@@ -1,6 +1,6 @@
 package com.summer.champions.domain;
 
-import com.summer.common.domain.IdEntity;
+import com.summer.common.persistence.IdEntity;
 
 import javax.persistence.Entity;
 

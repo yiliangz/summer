@@ -1,6 +1,6 @@
 package com.summer.common.utils;
 
-import com.summer.common.domain.RequestType;
+import com.summer.common.constant.RequestType;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;

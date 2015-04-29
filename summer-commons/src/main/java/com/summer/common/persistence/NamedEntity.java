@@ -1,9 +1,12 @@
-package com.summer.common.domain;
+package com.summer.common.persistence;
+
+import javax.persistence.MappedSuperclass;
 
 /**
  * Created by Allen on 2015/4/18.
  */
-public class NamedEntity {
+@MappedSuperclass
+public class NamedEntity extends IdEntity{
 
     String name;
 

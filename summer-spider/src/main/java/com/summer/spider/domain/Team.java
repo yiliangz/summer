@@ -1,14 +1,22 @@
 package com.summer.spider.domain;
 
-import com.summer.common.domain.NamedEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.google.common.collect.Lists;
+import com.summer.common.persistence.NamedEntity;
+import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Transient;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Allen on 2015/4/17.
  */
+@Entity
+@DynamicUpdate(value = true)
+@Table(name = "team")
 public class Team extends NamedEntity {
 
+    @Transient
     private Division division;
 
     private String city;
@@ -28,6 +36,10 @@ public class Team extends NamedEntity {
 
     /* 英文缩写 */
     private String abbr;
+
+    @OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private List<Player> players = Lists.newArrayList();
 
     public Division getDivision() {
         return division;

@@ -1,6 +1,6 @@
 package com.summer.spider.parser;
 
-import com.summer.common.domain.EncodingConstant;
+import com.summer.common.constant.EncodingConstant;
 import com.summer.common.utils.DateUtils;
 import com.summer.common.utils.HttpUrlContextUtils;
 import com.summer.common.utils.RegexUtils;

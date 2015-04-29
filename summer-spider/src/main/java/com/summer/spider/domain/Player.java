@@ -1,12 +1,16 @@
 package com.summer.spider.domain;
 
-import com.summer.common.domain.Person;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.summer.common.extend.Person;
+import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 /**
  * Created by Allen on 2015/4/17.
  */
+@Entity
+@Table(name = "player")
 public class Player extends Person {
 
     private long nbaBallAge;
@@ -16,6 +20,11 @@ public class Player extends Person {
     private String no;
 
     private String birthPlace;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teamId")
+    @JsonBackReference
+    private Team team;
 
     @Transient
     private String url;
@@ -59,4 +68,13 @@ public class Player extends Person {
     public void setBirthPlace(String birthPlace) {
         this.birthPlace = birthPlace;
     }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
 }

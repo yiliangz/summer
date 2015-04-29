@@ -1,4 +1,4 @@
-package com.summer.common.domain;
+package com.summer.common.constant;
 
 /**
  * Created by Allen on 2015/4/15.

@@ -38,7 +38,7 @@
 		<!--<constructor-arg ref="dataSourceSpied" />-->
 	<!--</bean>-->
 
-	<!--<context:component-scan base-package="com.summer"/>-->
+	<!--<context:component-scan persistence-package="com.summer"/>-->
 
 	<bean id="sessionFactory"
 		  class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">

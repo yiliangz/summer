@@ -1,4 +1,4 @@
-package com.summer.common.domain.page;
+package com.summer.common.page;
 
 /**
  * Created by Allen on 2015/4/27.
@@ -11,6 +11,11 @@ public class Order {
 
     public enum Direction {
         ASC,DESC
+    }
+
+    public Order(String field,Direction direction) {
+        this.field = field;
+        this.direction = direction;
     }
 
     public String getField() {

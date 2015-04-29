@@ -1,9 +1,7 @@
 package com.summer.champions.domain;
 
 
-import com.summer.common.domain.IdEntity;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import com.summer.common.persistence.IdEntity;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;

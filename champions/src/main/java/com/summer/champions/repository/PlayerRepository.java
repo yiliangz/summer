@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * Created by Allen on 2015/3/14.
  */
 @Repository
-public class PlayerRepository extends CrudRepositoryImpl <Player,Long> {
+public class PlayerRepository extends CrudRepositoryImpl<Player,Long> {
 
 //    private SessionFactory sessionFactory;
 

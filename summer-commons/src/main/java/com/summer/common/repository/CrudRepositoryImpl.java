@@ -1,14 +1,12 @@
 package com.summer.common.repository;
 
-import com.summer.common.domain.IdEntity;
-import com.summer.common.domain.Phone;
+import com.summer.common.persistence.IdEntity;
+import com.summer.common.page.Page;
 import com.summer.common.utils.ReflectionUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.HibernateTemplate;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -72,6 +70,12 @@ public class CrudRepositoryImpl
             query.setParameter(i,params[i]);
         }
         return query.list();
+    }
+
+    @Override
+    public Page getPage() {
+
+        return null;
     }
 
 }

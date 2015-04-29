@@ -1,14 +1,12 @@
 package com.summer.common.web;
 
-import com.summer.common.domain.IdEntity;
-import com.summer.common.domain.ResponseMessage;
+import com.summer.common.persistence.IdEntity;
+import com.summer.common.extend.ResponseMessage;
 import com.summer.common.service.CrudService;
-import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;

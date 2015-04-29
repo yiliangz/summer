@@ -1,10 +1,8 @@
 package com.summer.common.service;
 
-import com.summer.common.domain.IdEntity;
+import com.summer.common.persistence.IdEntity;
 import com.summer.common.repository.CrudRepository;
-import com.summer.common.utils.ReflectionUtils;
 import org.apache.commons.beanutils.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 import java.io.Serializable;

@@ -1,4 +1,4 @@
-package com.summer.common.domain.page;
+package com.summer.common.page;
 
 import java.util.List;
 
@@ -21,6 +21,10 @@ public interface Page<T> {
 
     public long getCurrent();
 
-    public long getTotalPage();
+    public long getSize();
+
+    public long getPageCount();
+
+    public long getPage();
 
 }

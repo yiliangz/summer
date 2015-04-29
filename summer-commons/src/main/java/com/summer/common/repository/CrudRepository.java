@@ -1,6 +1,7 @@
 package com.summer.common.repository;
 
-import com.summer.common.domain.IdEntity;
+import com.summer.common.persistence.IdEntity;
+import com.summer.common.page.Page;
 
 import java.io.Serializable;
 import java.util.List;
@@ -24,4 +25,5 @@ public interface CrudRepository <T extends IdEntity,PK extends Serializable> {
 
     public List<T> query(String sql,Object[] params);
 
+    public Page getPage();
 }

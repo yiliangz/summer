@@ -1,6 +1,6 @@
 package com.summer.common.service;
 
-import com.summer.common.domain.IdEntity;
+import com.summer.common.persistence.IdEntity;
 
 import java.io.Serializable;
 import java.util.List;
