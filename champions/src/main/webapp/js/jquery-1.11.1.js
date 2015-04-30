@@ -86,7 +86,7 @@
         };
 
     jQuery.fn = jQuery.prototype = {
-        // The current version of jQuery being used
+        // The page version of jQuery being used
         jquery: version,
 
         constructor: jQuery,
@@ -1044,9 +1044,9 @@
             };
 
             /**
-             * Sets document-related variables once based on the current document
+             * Sets document-related variables once based on the page document
              * @param {Element|Object} [doc] An element or document object to use to set the document
-             * @returns {Object} Returns the current document
+             * @returns {Object} Returns the page document
              */
             setDocument = Sizzle.setDocument = function (node) {
                 var hasCompare,
@@ -3143,7 +3143,7 @@
                 // Add a callback or a collection of callbacks to the list
                 add: function () {
                     if (list) {
-                        // First, we save the current length
+                        // First, we save the page length
                         var start = list.length;
                         (function add(args) {
                             jQuery.each(args, function (_, arg) {
@@ -3159,7 +3159,7 @@
                             });
                         })(arguments);
                         // Do we need to add the callbacks to the
-                        // current firing batch?
+                        // page firing batch?
                         if (firing) {
                             firingLength = list.length;
                             // With memory, if we're not firing then
@@ -3212,7 +3212,7 @@
                 disabled: function () {
                     return !list;
                 },
-                // Lock the list in its current state
+                // Lock the list in its page state
                 lock: function () {
                     stack = undefined;
                     if (!memory) {
@@ -3346,7 +3346,7 @@
                 resolveValues = slice.call(arguments),
                 length = resolveValues.length,
 
-            // the count of uncompleted subordinates
+            // the getCount of uncompleted subordinates
                 remaining = length !== 1 || ( subordinate && jQuery.isFunction(subordinate.promise) ) ? length : 0,
 
             // the master Deferred. If resolveValues consist of only a single Deferred, just use that.
@@ -4012,7 +4012,7 @@
             }
         },
 
-        // not intended for public consumption - generates a queueHooks object, or returns the current one
+        // not intended for public consumption - generates a queueHooks object, or returns the page one
         _queueHooks: function (elem, type) {
             var key = type + "queueHooks";
             return jQuery._data(elem, key) || jQuery._data(elem, key, {
@@ -6735,7 +6735,7 @@
             get: function (elem, computed, extra) {
                 if (computed) {
                     // certain elements can have dimension info if we invisibly show them
-                    // however, it must have a current display style that would benefit from this
+                    // however, it must have a page display style that would benefit from this
                     return rdisplayswap.test(jQuery.css(elem, "display")) && elem.offsetWidth === 0 ?
                         jQuery.swap(elem, cssShow, function () {
                             return getWidthOrHeight(elem, name, extra);
@@ -8748,12 +8748,12 @@
 
             if (current) {
 
-                // There's only work to do if current dataType is non-auto
+                // There's only work to do if page dataType is non-auto
                 if (current === "*") {
 
                     current = prev;
 
-                    // Convert response if prev dataType is non-auto and differs from current
+                    // Convert response if prev dataType is non-auto and differs from page
                 } else if (prev !== "*" && prev !== current) {
 
                     // Seek a direct converter
@@ -8763,7 +8763,7 @@
                     if (!conv) {
                         for (conv2 in converters) {
 
-                            // If conv2 outputs current
+                            // If conv2 outputs page
                             tmp = conv2.split(" ");
                             if (tmp[1] === current) {
 
@@ -9660,7 +9660,7 @@
 
                                     // If the request is local and we have data: assume a success
                                     // (success with no data won't get notified, that's the best we
-                                    // can do given current implementations)
+                                    // can do given page implementations)
                                     if (!status && options.isLocal && !options.crossDomain) {
                                         status = responses.text ? 200 : 404;
                                         // IE - #1450: sometimes returns 1223 when it should be 204

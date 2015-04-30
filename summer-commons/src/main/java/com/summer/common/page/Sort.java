@@ -1,5 +1,7 @@
 package com.summer.common.page;
 
+import org.hibernate.criterion.Order;
+
 import java.util.List;
 
 /**
@@ -7,14 +9,42 @@ import java.util.List;
  */
 public class Sort {
 
-    private List<Order> orders;
+    private String field;
 
-    public Sort(List<Order> orders) {
-        this.orders = orders;
+    private Order order;
+
+    public enum Order {
+        ASC,DESC
     }
 
-    public void add(Order order) {
-        orders.add(order);
+    public Sort() {}
+
+    public Sort(String field, Order order) {
+        this.field = field;
+        this.order = order;
     }
 
+    public String getField() {
+        return field;
+    }
+
+    public void setField(String field) {
+        this.field = field;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setDirection(Order direction) {
+        this.order = order;
+    }
+
+    public org.hibernate.criterion.Order getHibernateOrder() {
+        if (this.order != null && this.order.equals(Order.DESC)) {
+            return org.hibernate.criterion.Order.desc(field);
+        } else {
+            return org.hibernate.criterion.Order.asc(field);
+        }
+    }
 }

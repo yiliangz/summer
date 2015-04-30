@@ -7,15 +7,21 @@ import java.util.List;
  */
 public abstract class AbstractPage<T> implements Page<T> {
 
-    private List<T> content;
+    protected static final long DEFAULT_SIZE = 10;
 
-    private long current;
+    protected List<T> content;
 
-    private long total;
+    protected long page;
 
-    private long totalPage;
+    protected long size;
 
-    private long size;
+    protected long total;
+
+    protected long totalPage;
+
+    public AbstractPage() {
+        this.size = this.size == 0 ? DEFAULT_SIZE : this.size;
+    }
 
     @Override
     public Page nextPage() {
@@ -29,17 +35,63 @@ public abstract class AbstractPage<T> implements Page<T> {
 
     @Override
     public List<T> getContent() {
-        return null;
+        return content;
     }
 
     @Override
     public boolean isFirst() {
-        return false;
+        return page == 0;
     }
 
     @Override
     public boolean hasNext() {
-        return false;
+        return total == 0 ? false : page < totalPage;
+    }
+
+    @Override
+    public void calculatePage(long total) {
+        this.total = total;
+        this.totalPage = (long) Math.ceil((double) total / (double) size);
+    }
+
+    public void setContent(List<T> content) {
+        this.content = content;
+    }
+
+    @Override
+    public long getPage() {
+        return page;
+    }
+
+    public void setPage(long page) {
+        this.page = page;
+    }
+
+    @Override
+    public long getSize() {
+        return size;
+    }
+
+    public void setSize(long size) {
+        this.size = size;
+    }
+
+    @Override
+    public long getTotal() {
+        return total;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
+    }
+
+    @Override
+    public long getTotalPage() {
+        return totalPage;
+    }
+
+    public void setTotalPage(long totalPage) {
+        this.totalPage = totalPage;
     }
 
 }

@@ -34,6 +34,15 @@
 		<property name="maxWait" value="${druid.maxWait}" />
 	</bean>
 
+	<!--<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">-->
+		<!--<constructor-arg ref="dataSourceSpied" />-->
+	<!--</bean>-->
+
+	<context:component-scan base-package="com.summer">
+		<context:exclude-filter
+				type="annotation"
+				expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
 
 	<bean id="sessionFactory"
 		  class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -65,5 +74,33 @@
 	<context:annotation-config/>
 
 	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true"/>
+
+    <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
+
+	<!-- 第一个*代表所有的返回值类型 -->
+	<!-- 第二个*代表所有的类 -->
+    <!-- 第三个*代表类所有方法 最后一个..代表所有的参数 -->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="edit*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="new*" propagation="REQUIRED" />
+			<tx:method name="set*" propagation="REQUIRED" />
+			<tx:method name="remove*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="change*" propagation="REQUIRED" />
+			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="find*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="load*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut id="txPointcut" expression="execution(* com.summer.*.service.*.*(..))"/>
+		<aop:advisor  advice-ref="txAdvice" pointcut-ref="txPointcut" />
+	</aop:config>
 
 </beans>

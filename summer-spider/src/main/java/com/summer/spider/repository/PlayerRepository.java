@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 /**
  * Created by Allen on 2015/4/28.
  */
-@Repository("playerRepository")
+@Repository
 public class PlayerRepository extends CrudRepositoryImpl<Player,Long> {
 
 }

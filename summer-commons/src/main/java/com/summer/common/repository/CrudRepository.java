@@ -1,10 +1,12 @@
 package com.summer.common.repository;
 
+import com.summer.common.page.PageRequest;
 import com.summer.common.persistence.IdEntity;
 import com.summer.common.page.Page;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Allen on 2015/3/24.
@@ -25,5 +27,8 @@ public interface CrudRepository <T extends IdEntity,PK extends Serializable> {
 
     public List<T> query(String sql,Object[] params);
 
-    public Page getPage();
+    public long getCount(Map<String, String> searchParams);
+
+    public Page getPage(PageRequest request);
+
 }

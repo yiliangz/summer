@@ -26,10 +26,10 @@ public class SearchFilter {
         this.operator = operator;
     }
 
-    public static List<SearchFilter> parse(Map<String,Object> searchParams) {
+    public static List<SearchFilter> parse(Map<String,String> searchParams) {
         List<SearchFilter> filters = Lists.newArrayList();
 
-        for (Map.Entry<String, Object> entry : searchParams.entrySet()) {
+        for (Map.Entry<String, String> entry : searchParams.entrySet()) {
             // 过滤掉空值
             String key = entry.getKey();
             Object value = entry.getValue();

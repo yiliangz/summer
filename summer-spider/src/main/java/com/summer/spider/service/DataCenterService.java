@@ -11,7 +11,6 @@ import java.util.List;
 
 /**
  * Created by Allen on 2015/4/21.
- * <p/>
  * DataCenterService用来整个数据抓取和同步,其中sync()方法为总入口
  */
 public class DataCenterService {

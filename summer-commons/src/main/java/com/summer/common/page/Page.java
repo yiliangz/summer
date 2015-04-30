@@ -17,14 +17,14 @@ public interface Page<T> {
 
     public boolean hasNext();
 
-    public long getTotal();
-
-    public long getCurrent();
+    public long getPage();
 
     public long getSize();
 
-    public long getPageCount();
+    public long getTotal();
 
-    public long getPage();
+    public long getTotalPage();
+
+    public void calculatePage(long total);
 
 }

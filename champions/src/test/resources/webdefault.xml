@@ -184,7 +184,7 @@
   <!--                                                                      -->
   <!--   classpath           What class path should I use while compiling   -->
   <!--                       generated servlets?  [Created dynamically      -->
-  <!--                       based on the current web application]          -->
+  <!--                       based on the page web application]          -->
   <!--                       Set to ? to make the container explicitly set  -->
   <!--                       this parameter.                                -->
   <!--                                                                      -->
@@ -230,7 +230,7 @@
   <!--                                                                      -->
   <!--   scratchdir          What scratch directory should we use when      -->
   <!--                       compiling JSP pages?  [default work directory  -->
-  <!--                       for the current web application]               -->
+  <!--                       for the page web application]               -->
   <!--                                                                      -->
   <!--   tagpoolMaxSize      The maximum tag handler pool size  [5]         -->
   <!--                                                                      -->

@@ -1,33 +1,28 @@
 package com.summer.common.page;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Allen on 2015/4/28.
  */
-public class PageRequest {
+public class PageRequest<T> extends AbstractPage<T> {
 
-    private long page;
+    private List<Sort> sorts = Lists.newArrayList();
 
-    private long size;
+    private Map<String,String> searchParams = Maps.newHashMap();
 
-    private Map<String,String> searchParams;
+    public PageRequest() {
 
-    public long getPage() {
-        return page;
     }
 
-    public void setPage(long page) {
+    public PageRequest(long page) {
         this.page = page;
     }
 
-    public long getSize() {
-        return size;
-    }
-
-    public void setSize(long size) {
-        this.size = size;
-    }
 
     public Map<String, String> getSearchParams() {
         return searchParams;
@@ -35,6 +30,18 @@ public class PageRequest {
 
     public void setSearchParams(Map<String, String> searchParams) {
         this.searchParams = searchParams;
+    }
+
+    public List<Sort> getSorts() {
+        return sorts;
+    }
+
+    public void setSorts(List<Sort> sorts) {
+        this.sorts = sorts;
+    }
+
+    public void addSort(Sort sort) {
+        sorts.add(sort);
     }
 
 }
