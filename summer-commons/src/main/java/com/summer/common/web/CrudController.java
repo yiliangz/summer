@@ -1,5 +1,7 @@
 package com.summer.common.web;
 
+import com.summer.common.page.Page;
+import com.summer.common.page.PageRequest;
 import com.summer.common.persistence.IdEntity;
 import com.summer.common.extend.ResponseMessage;
 import com.summer.common.service.CrudService;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -58,6 +61,27 @@ public abstract class CrudController <T extends IdEntity,PK extends Serializable
     @ResponseBody
     public void delete(@PathVariable PK id) {
         crudService.delete(id);
+    }
+
+
+    /**
+     * 分页的访问方式如下:
+     *  {
+     *     page : 1,
+     *     size : 10,
+     *     searchParams:   { name_eq : "Computer",  team.age_lt : 6 },
+     *     sort:           { name : asc,  team.englishName : desc }
+     *  }
+     *
+     * @param page
+     * @return Page
+     */
+    @RequestMapping(value = "/page",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Page page(@RequestBody PageRequest<T> page) {
+        return crudService.getPage(page);
     }
 
 }

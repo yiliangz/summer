@@ -20,6 +20,8 @@ public class Player extends IdEntity{
 
     public String address;
 
+    public String birthPlace;
+
     public String getName() {
         return name;
     }
@@ -36,5 +38,12 @@ public class Player extends IdEntity{
         this.address = address;
     }
 
+    public String getBirthPlace() {
+        return birthPlace;
+    }
+
+    public void setBirthPlace(String birthPlace) {
+        this.birthPlace = birthPlace;
+    }
 }
 

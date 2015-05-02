@@ -3,6 +3,7 @@ package com.summer.common.repository;
 import com.summer.common.page.PageRequest;
 import com.summer.common.persistence.IdEntity;
 import com.summer.common.page.Page;
+import org.hibernate.Criteria;
 
 import java.io.Serializable;
 import java.util.List;
@@ -29,6 +30,8 @@ public interface CrudRepository <T extends IdEntity,PK extends Serializable> {
 
     public long getCount(Map<String, String> searchParams);
 
-    public Page getPage(PageRequest request);
+    public Page getPage(PageRequest<T> page);
+
+    public long getCount(Criteria criteria);
 
 }

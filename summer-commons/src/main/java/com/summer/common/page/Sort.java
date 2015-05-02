@@ -1,8 +1,10 @@
 package com.summer.common.page;
 
+import com.google.common.collect.Lists;
 import org.hibernate.criterion.Order;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Allen on 2015/4/27.
@@ -46,5 +48,16 @@ public class Sort {
         } else {
             return org.hibernate.criterion.Order.asc(field);
         }
+    }
+
+    public static List<Sort> parse(Map<String,String> map) {
+        List<Sort> sorts = Lists.newArrayList();
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            // 过滤掉空值
+            String field = entry.getKey();
+            String order = entry.getValue();
+            sorts.add(new Sort(field,Order.valueOf(order.toUpperCase())));
+        }
+        return sorts;
     }
 }

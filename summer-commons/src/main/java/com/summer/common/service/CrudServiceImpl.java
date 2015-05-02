@@ -1,8 +1,11 @@
 package com.summer.common.service;
 
+import com.summer.common.page.Page;
+import com.summer.common.page.PageRequest;
 import com.summer.common.persistence.IdEntity;
 import com.summer.common.repository.CrudRepository;
 import org.apache.commons.beanutils.BeanUtils;
+import org.hibernate.Criteria;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
@@ -61,6 +64,21 @@ public abstract class CrudServiceImpl<T extends IdEntity,PK extends Serializable
     @Override
     public List<T> query(String sql, Object[] params) {
         return crudRepository.query(sql,params);
+    }
+
+    @Override
+    public long getCount(Map<String, String> searchParams) {
+        return crudRepository.getCount(searchParams);
+    }
+
+    @Override
+    public long getCount(Criteria criteria) {
+        return crudRepository.getCount(criteria);
+    }
+
+    @Override
+    public Page getPage(PageRequest<T> page) {
+        return crudRepository.getPage(page);
     }
 
 }

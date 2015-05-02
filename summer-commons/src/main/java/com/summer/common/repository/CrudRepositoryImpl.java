@@ -89,7 +89,7 @@ public class CrudRepositoryImpl
     }
 
     @Override
-    public Page<T> getPage(PageRequest page) {
+    public Page<T> getPage(PageRequest<T> page) {
         Criteria criteria = getCriteria(page.getSearchParams());
 
         //取得符合searchParams参数的结果集的总行数
@@ -105,8 +105,7 @@ public class CrudRepositoryImpl
     }
 
     public Criteria getCriteria(Map<String, String> searchParams) {
-        DetachedCriteria detachedCriteria = CriteriaParser.parse(searchParams, entityClass);
-        return detachedCriteria.getExecutableCriteria(getCurrentSession());
+        return CriteriaParser.parse(searchParams, entityClass, getCurrentSession());
     }
 
 }

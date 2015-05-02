@@ -1,6 +1,9 @@
 package com.summer.common.service;
 
+import com.summer.common.page.Page;
+import com.summer.common.page.PageRequest;
 import com.summer.common.persistence.IdEntity;
+import org.hibernate.Criteria;
 
 import java.io.Serializable;
 import java.util.List;
@@ -24,5 +27,11 @@ public interface CrudService <T extends IdEntity,PK extends Serializable> {
     public List<T> getAll();
 
     public List<T> query(String sql,Object[] params);
+
+    public long getCount(Map<String, String> searchParams);
+
+    public Page getPage(PageRequest<T> page);
+
+    public long getCount(Criteria criteria);
 
 }

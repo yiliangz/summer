@@ -1,11 +1,10 @@
 package com.summer.test.spider.parser;
 
 import com.google.common.collect.Maps;
-import com.summer.common.page.PageRequest;
 import com.summer.common.persistence.CriteriaParser;
 import com.summer.common.persistence.SearchFilter;
 import com.summer.spider.domain.Player;
-import com.summer.spider.repository.PlayerRepository;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
@@ -14,7 +13,6 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -59,8 +57,8 @@ public class HibernateCriteriaTest {
         searchParams.put("team.englishName_eq","Warriors");
         searchParams.put("birthPlace_eq","eeeee");
         List<SearchFilter> filters = SearchFilter.parse(searchParams);
-        DetachedCriteria criteria = CriteriaParser.parse(filters, Player.class);
-        criteria.getExecutableCriteria(session).list();
+        Criteria criteria = CriteriaParser.parse(filters, Player.class,session);
+        criteria.list();
     }
 
     @Test
@@ -71,6 +69,7 @@ public class HibernateCriteriaTest {
         Object count =
                 criteria.setProjection(Projections.rowCount())
                 .add(Restrictions.like("name", "%eee%"))
+                .addOrder(Order.asc("name"))
                 .getExecutableCriteria(session)
                 .uniqueResult();
         System.out.println(count);
