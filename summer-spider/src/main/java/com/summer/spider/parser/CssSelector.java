@@ -13,7 +13,9 @@ public class CssSelector {
 
         public final static String division = "tr:eq(1) td";
 
-        public final static String team = "tr:gt(1) td a";
+        public final static String row = "tr:gt(1)";
+
+        public final static String team = "td a";
 
     }
 

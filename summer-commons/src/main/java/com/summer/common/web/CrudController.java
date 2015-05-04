@@ -22,6 +22,12 @@ public abstract class CrudController <T extends IdEntity,PK extends Serializable
     @Resource
     protected CrudService<T,PK> crudService;
 
+
+    /**
+     * 返回主键为id的json数据
+     * @param id    主键
+     * @return  Object
+     * */
     @RequestMapping(value = "/{id}")
     @ResponseBody
     public Object get(@PathVariable PK id) {
@@ -34,6 +40,12 @@ public abstract class CrudController <T extends IdEntity,PK extends Serializable
         return crudService.getAll();
     }
 
+
+    /**
+     * 保存entity对象
+     * @param entity    要保存的entity对象
+     * @return  Object  返回保存后的entity的json对象
+     * */
     @RequestMapping(value = "/save",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -42,6 +54,13 @@ public abstract class CrudController <T extends IdEntity,PK extends Serializable
         return crudService.save(entity);
     }
 
+
+    /**
+     * 更新主键为id的对象
+     * @param id           主键
+     * @param entityMap    Map格式的数据
+     * @return  Object
+     * */
     @RequestMapping(value = "/update/{id}",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -73,8 +92,8 @@ public abstract class CrudController <T extends IdEntity,PK extends Serializable
      *     sort:           { name : asc,  team.englishName : desc }
      *  }
      *
-     * @param page
-     * @return Page
+     * @param page  PageRequest对象用来接收前端传送过来的数据
+     * @return Page PageImpl对象
      */
     @RequestMapping(value = "/page",
             method = RequestMethod.POST,

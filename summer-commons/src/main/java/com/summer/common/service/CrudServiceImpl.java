@@ -6,6 +6,7 @@ import com.summer.common.persistence.IdEntity;
 import com.summer.common.repository.CrudRepository;
 import org.apache.commons.beanutils.BeanUtils;
 import org.hibernate.Criteria;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
@@ -19,7 +20,7 @@ import java.util.Map;
 public abstract class CrudServiceImpl<T extends IdEntity,PK extends Serializable>
         implements CrudService<T,PK> {
 
-    @Resource
+    @Autowired
     public CrudRepository<T,PK> crudRepository;
 
     @Override
@@ -49,6 +50,11 @@ public abstract class CrudServiceImpl<T extends IdEntity,PK extends Serializable
             e.printStackTrace();
         }
         crudRepository.update(entity);
+    }
+
+    @Override
+    public List<T> saveEntities(List<T> entities) {
+        return crudRepository.saveEntities(entities);
     }
 
     @Override

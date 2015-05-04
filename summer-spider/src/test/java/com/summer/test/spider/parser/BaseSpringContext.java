@@ -1,6 +1,9 @@
 package com.summer.test.spider.parser;
 
+import com.summer.spider.repository.DivisionRepository;
+import com.summer.spider.service.*;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -10,5 +13,20 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath*:applicationContext.xml"})
 public class BaseSpringContext {
+
+    @Autowired
+    RegionService regionService;
+
+    @Autowired
+    DivisionService divisionService;
+
+    @Autowired
+    TeamService teamService;
+
+    @Autowired
+    PlayerService playerService;
+
+    @Autowired
+    DataCenterService dataCenterService;
 
 }

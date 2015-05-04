@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  */
 public class RegexUtils {
 
-    public static final String numericPattern = "[0-9]+";
+    public static final String numericPattern = "([1-9]+[0-9]*|0)(\\.[\\d]+)?";
 
     public static String getMatchData(String pattern, String matcher, int index) {
         Pattern p = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);

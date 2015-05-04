@@ -18,6 +18,8 @@ public interface CrudService <T extends IdEntity,PK extends Serializable> {
 
     public T save(T entity);
 
+    public List<T> saveEntities(List<T> entities);
+
     public void update(T entity);
 
     public void update(PK id,Map<String,String> entityMap);

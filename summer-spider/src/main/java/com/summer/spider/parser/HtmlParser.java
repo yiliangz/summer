@@ -15,6 +15,9 @@ import java.util.Date;
  */
 public abstract class HtmlParser implements DataParser {
 
+    /**
+     * jsoup的Element类型,相当jquery的jquery对象
+     * */
     Element content;
 
     public HtmlParser(){
@@ -26,11 +29,23 @@ public abstract class HtmlParser implements DataParser {
         return this;
     }
 
+    /**
+     * 解析html的内容以初始化content
+     * @param html        html内容
+     * @return  HtmlParser
+     */
     public HtmlParser init(String html) {
         this.content = Jsoup.parse(html);
         return this;
     }
 
+
+    /**
+     * 把html的内容用selector解析出来
+     * @param html        html内容
+     * @param selector    encoding编码
+     * @return  HtmlParser
+     */
     public HtmlParser init(String html, String selector) {
         this.content = Jsoup.parse(html).select(selector).first();
         return this;
@@ -39,7 +54,10 @@ public abstract class HtmlParser implements DataParser {
 
     /**
      * 按encoding参数的格式从url中读取
-     * */
+     * @param url         http url
+     * @param encoding    encoding编码
+     * @return  HtmlParser
+     */
     public HtmlParser load(String url, String encoding) {
         this.content = Jsoup.parse(HttpUrlContextUtils.getResponseText(url,null,encoding));
         return this;
@@ -47,7 +65,9 @@ public abstract class HtmlParser implements DataParser {
 
     /**
      * 按gb2312的encoding的格式从url中读取
-     * */
+     * @param url    http url
+     * @return        HtmlParser
+     */
     public HtmlParser loadByGbEncoding(String url) {
         return load(url, EncodingConstant.GB_ENCODING);
     }
@@ -56,20 +76,39 @@ public abstract class HtmlParser implements DataParser {
         return this.content;
     }
 
+    public void setContent(Element content) {
+        this.content = content;
+    }
+
     public void parse() {
 
     }
 
+    /**
+     * 获取Long类型的数据
+     * @param data    String格式的数据
+     * @return Long
+     */
     @Override
     public Long getLong(String data) {
         return Long.valueOf(RegexUtils.getNumericData(data));
     }
 
+    /**
+     * 获取Double类型的数据
+     * @param data    String格式的数据
+     * @return  Double
+     */
     @Override
     public Double getDouble(String data) {
         return Double.valueOf(RegexUtils.getNumericData(data));
     }
 
+    /**
+     * 获取Date类型的数据
+     * @param data    String格式的数据
+     * @return  Date
+     */
     @Override
     public Date getDate(String data) {
         try {

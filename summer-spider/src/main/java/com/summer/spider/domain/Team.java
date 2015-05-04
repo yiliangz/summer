@@ -16,7 +16,9 @@ import java.util.List;
 @Table(name = "team")
 public class Team extends NamedEntity {
 
-    @Transient
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "divisionId")
+    @JsonBackReference
     private Division division;
 
     private String city;
@@ -96,4 +98,5 @@ public class Team extends NamedEntity {
     public void setChampions(Long champions) {
         this.champions = champions;
     }
+
 }

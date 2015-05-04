@@ -42,7 +42,25 @@
             });
         }
 
-        page();
+        function update() {
+            var params = {
+                name: "ggg"
+            };
+            $.ajax({
+                url:"/player/update/36",
+                type:"post",
+                contentType: "application/json",
+                data:JSON.stringify(params),
+                dataType:"json",
+                success: function(){
+
+                }
+            });
+        }
+
+//        page();
+
+        update();
 
     </script>
 </body>

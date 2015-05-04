@@ -167,6 +167,7 @@ public class CriteriaParser {
         }
     }
 
+
     public static String getPath(Criteria criteria) {
         if (criteria instanceof CriteriaImpl) {
             return null;

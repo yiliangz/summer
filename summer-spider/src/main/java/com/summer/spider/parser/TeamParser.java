@@ -32,8 +32,10 @@ public class TeamParser extends HtmlParser{
         parsePlayers();
     }
 
-    public void ParseTeam() {
-        team = new Team();
+    public Team ParseTeam() {
+        if (team == null) {
+            team = new Team();
+        }
         Elements brief = getContent().select("#left > #table730middle").eq(0).select("tbody > tr");
         String str = getContent().select(CssSelector.Team.englishName).html();
         team.setName(brief.eq(0).select("td:eq(1)").html());
@@ -46,6 +48,7 @@ public class TeamParser extends HtmlParser{
 
         Elements coachElement = brief.eq(1).select("td").eq(2);
         parseCoach(team.getEnglishName(),coachElement);
+        return team;
     }
 
     public void parseCoach(String teamName,Elements coachElement) {
@@ -61,6 +64,7 @@ public class TeamParser extends HtmlParser{
         for (int i = 0; i < roster.size()&&i<18; i++) {
             Player player = new Player();
             Element playerElement = roster.get(i);
+            player.setTeam(team);
             player.setUrl(playerElement.select("td:eq(1) a").attr("href"));
             player.setNo(playerElement.select("td:eq(0)").html());
             player.setName(playerElement.select("td:eq(1) a").html());

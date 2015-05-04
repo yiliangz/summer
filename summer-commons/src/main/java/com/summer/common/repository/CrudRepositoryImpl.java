@@ -1,16 +1,15 @@
 package com.summer.common.repository;
 
+import com.summer.common.page.Page;
 import com.summer.common.page.PageImpl;
 import com.summer.common.page.PageRequest;
 import com.summer.common.persistence.CriteriaParser;
 import com.summer.common.persistence.IdEntity;
-import com.summer.common.page.Page;
 import com.summer.common.utils.ReflectionUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -53,6 +52,13 @@ public class CrudRepositoryImpl
     public T save(T entity) {
         getCurrentSession().save(entity);
         return entity;
+    }
+
+    public List<T> saveEntities(List<T> entities) {
+        for (T entity : entities) {
+            save(entity);
+        }
+        return entities;
     }
 
     @Override

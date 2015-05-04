@@ -36,7 +36,6 @@ public class PageTest extends BaseSpringContext{
         Map<String,String> searchParams = Maps.newHashMap();
         searchParams.put("team.englishName_eq","Lakers");
         searchParams.put("team.name_eq","湖人");
-//        searchParams.put("team.coach.division.name_eq","湖人");
         searchParams.put("name_like","x");
 
 
@@ -44,7 +43,7 @@ public class PageTest extends BaseSpringContext{
         page.setSearchParams(searchParams);
         page.setPage(0);
         page.setSize(10);
-//        page.addSort(new Sort("name", Sort.Order.DESC));
+        page.addSort(new Sort("name", Sort.Order.DESC));
         page.addSort(new Sort("team.name", Sort.Order.ASC));
         page.addSort(new Sort("team.englishName", Sort.Order.ASC));
 
