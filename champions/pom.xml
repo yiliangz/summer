@@ -28,6 +28,11 @@
             <artifactId>summer-commons</artifactId>
             <version>${summer.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.summer</groupId>
+            <artifactId>summer-spider</artifactId>
+            <version>${summer.version}</version>
+        </dependency>
     </dependencies>
 
 

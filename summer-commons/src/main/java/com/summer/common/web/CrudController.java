@@ -5,6 +5,7 @@ import com.summer.common.page.PageRequest;
 import com.summer.common.persistence.IdEntity;
 import com.summer.common.extend.ResponseMessage;
 import com.summer.common.service.CrudService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,9 +20,8 @@ import java.util.Map;
  */
 public abstract class CrudController <T extends IdEntity,PK extends Serializable>{
 
-    @Resource
+    @Autowired
     protected CrudService<T,PK> crudService;
-
 
     /**
      * 返回主键为id的json数据

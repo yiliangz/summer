@@ -61,7 +61,7 @@ public class TeamParser extends HtmlParser{
 
     public void parsePlayers() {
         Elements roster = getContent().select("#left > #table730middle").eq(1).select("tbody > tr:gt(0)");
-        for (int i = 0; i < roster.size()&&i<18; i++) {
+        for (int i = 0; i < roster.size(); i++) {
             Player player = new Player();
             Element playerElement = roster.get(i);
             player.setTeam(team);
