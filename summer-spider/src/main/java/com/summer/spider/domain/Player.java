@@ -1,8 +1,7 @@
 package com.summer.spider.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.summer.common.extend.Person;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
@@ -10,8 +9,13 @@ import javax.persistence.*;
  * Created by Allen on 2015/4/17.
  */
 @Entity
-@Table(name = "player")
+@Table(name = "Player")
 public class Player extends Person {
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teamId")
+    @JsonManagedReference
+    private Team team;
 
     private long nbaBallAge;
 
@@ -21,10 +25,11 @@ public class Player extends Person {
 
     private String birthPlace;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "teamId")
-    @JsonBackReference
-    private Team team;
+    private String graduatedSchool;
+
+    private long joinYear;
+
+    private String draftBrief;         //选秀情况
 
     @Transient
     private String url;
@@ -69,6 +74,14 @@ public class Player extends Person {
         this.birthPlace = birthPlace;
     }
 
+    public String getGraduatedSchool() {
+        return graduatedSchool;
+    }
+
+    public void setGraduatedSchool(String graduatedSchool) {
+        this.graduatedSchool = graduatedSchool;
+    }
+
     public Team getTeam() {
         return team;
     }
@@ -77,4 +90,19 @@ public class Player extends Person {
         this.team = team;
     }
 
+    public long getJoinYear() {
+        return joinYear;
+    }
+
+    public void setJoinYear(long joinYear) {
+        this.joinYear = joinYear;
+    }
+
+    public String getDraftBrief() {
+        return draftBrief;
+    }
+
+    public void setDraftBrief(String draftBrief) {
+        this.draftBrief = draftBrief;
+    }
 }

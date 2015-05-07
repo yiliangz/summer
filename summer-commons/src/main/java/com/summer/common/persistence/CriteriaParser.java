@@ -94,7 +94,7 @@ public class CriteriaParser {
      * @param criteria    criteria对象
      * @param page        PageRequest分页请求
      * @return
-     * */
+     */
     public static Criteria parsePageParams(Criteria criteria, PageRequest page) {
         criteria.setProjection(null);
         int firstResult = (int) (page.getPage() * page.getSize());
@@ -120,7 +120,7 @@ public class CriteriaParser {
      * @param criteria
      * @param names
      * @return
-     * */
+     */
     public static Criteria findOrCreateSubcriteria(Criteria criteria, String[] names) {
         if (names != null && names.length > 1) {
             int index = names.length - 2;
@@ -147,7 +147,7 @@ public class CriteriaParser {
     * @param names
     * @param index
     * @return Criteria
-    * */
+    */
     public static Criteria findSubcriteria(Criteria criteria, String[] names, int index) {
         String subcriteriaName = names[index];
         boolean isExists = false;
@@ -167,7 +167,11 @@ public class CriteriaParser {
         }
     }
 
-
+    /**
+     * 若是subcriteria类型则返回它的path,否则返回null
+     * @param criteria
+     * @return Criteria
+     */
     public static String getPath(Criteria criteria) {
         if (criteria instanceof CriteriaImpl) {
             return null;

@@ -1,10 +1,7 @@
 package com.summer.spider.parser;
 
 import com.google.common.collect.Lists;
-import com.summer.spider.domain.Division;
-import com.summer.spider.domain.Player;
-import com.summer.spider.domain.Region;
-import com.summer.spider.domain.Team;
+import com.summer.spider.domain.*;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -25,6 +22,8 @@ public class DataCenterParser extends HtmlParser {
 
     List<Player> players = Lists.newArrayList();
 
+    List<PlayerSeasonStats> playerSeasonStatses = Lists.newArrayList();
+
     public void defaultInitializing() {
         setContent(getContent().select(CssSelector.Center.dataCenter).first());
     }
@@ -35,6 +34,7 @@ public class DataCenterParser extends HtmlParser {
         parseDivisions();
         parseTeams();
         parseTeamsEx();
+        parsePlayers();
     }
 
     public List<Region> parseRegions() {
@@ -79,19 +79,35 @@ public class DataCenterParser extends HtmlParser {
     }
 
     public List<Team> parseTeamsEx() {
-        int i = 0;
         for (Team team : this.teams) {
             TeamParser teamParser = new TeamParser();
             teamParser.loadByGbEncoding(team.getUrl());
             teamParser.setTeam(team);
             teamParser.parse();
             players.addAll(teamParser.getPlayers());
-            if (i == 2) {
-                break;
-            }
-            i++;
         }
         return this.teams;
+    }
+
+    /* 进一步解析球员 */
+    public List<Player> parsePlayers() {
+        for (Player player : players) {
+            PlayerParser playerParser = new PlayerParser();
+            playerParser.loadByGbEncoding(player.getUrl());
+            if (isInitSuccess()) {
+                playerParser.setPlayer(player);
+                playerParser.parse();
+                playerSeasonStatses.addAll(playerParser.getPlayerSeasonStatses());
+            }
+            try {
+                System.out.println("synchronizing player:  " +player.getEnglishName() +
+                        " , from team: " + player.getTeam().getEnglishName() + "...");
+                Thread.sleep(500L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return players;
     }
 
     public List<Region> getRegions() {
@@ -124,6 +140,14 @@ public class DataCenterParser extends HtmlParser {
 
     public void setPlayers(List<Player> players) {
         this.players = players;
+    }
+
+    public List<PlayerSeasonStats> getPlayerSeasonStatses() {
+        return playerSeasonStatses;
+    }
+
+    public void setPlayerSeasonStatses(List<PlayerSeasonStats> playerSeasonStatses) {
+        this.playerSeasonStatses = playerSeasonStatses;
     }
 
 }

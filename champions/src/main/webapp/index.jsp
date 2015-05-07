@@ -21,10 +21,10 @@
 
         function page() {
             var params = {
-                page: 1,
-                size: 3,
+                page: 0,
+                size: 5,
                 searchParams: {
-                    "name_like":"x"
+                    "team.name_like":"队"
                 },
                 sort: {
                     "birthPlace": "asc"
@@ -44,10 +44,10 @@
 
         function update() {
             var params = {
-                name: "ggg"
+                city: "san antonio"
             };
             $.ajax({
-                url:"/player/update/36",
+                url:"/team/update/1",
                 type:"post",
                 contentType: "application/json",
                 data:JSON.stringify(params),
@@ -58,9 +58,9 @@
             });
         }
 
-//        page();
+        page();
 
-        update();
+//        update();
 
     </script>
 </body>

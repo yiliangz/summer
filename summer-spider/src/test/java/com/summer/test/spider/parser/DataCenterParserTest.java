@@ -19,20 +19,7 @@ public class DataCenterParserTest extends BaseSpringContext {
     public void testParseElements() {
         HtmlParser parser =
                 new DataCenterParser().init(HtmlContext.getDataCenterHtml(), CssSelector.Center.dataCenter);
-        parser.parse();
-    }
-
-    @Test
-    public void testSaveRegionAndDivision() {
-
-        DataCenterParser parser = new DataCenterParser();
-        parser.init(HtmlContext.getDataCenterHtml(), CssSelector.Center.dataCenter);
-        parser.parse();
-        regionService.saveEntities(parser.getRegions());
-        divisionService.saveEntities(parser.getDivisions());
-        teamService.saveEntities(parser.getTeams());
-        playerService.saveEntities(parser.getPlayers());
-
+//        parser.parse();
     }
 
     @Test

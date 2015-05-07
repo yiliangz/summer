@@ -15,7 +15,7 @@ import java.util.List;
  */
 /* 西部和东部 */
 @Entity
-@Table(name = "region")
+@Table(name = "Region")
 public class Region extends NamedEntity {
 
     @OneToMany(mappedBy = "region", fetch = FetchType.LAZY)

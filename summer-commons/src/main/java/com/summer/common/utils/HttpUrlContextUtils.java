@@ -6,16 +6,21 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class HttpUrlContextUtils {
+
+    private static String zhPattern = "[\\u4e00-\\u9fa5]+";
 
     /**
      * @param args
      */
     public static void main(String[] args) throws Exception {
-//        IOStreamUtil.saveFile("http://www.sinaimg.cn/ty/nba/coach/24.jpg","champions/src/main/webapp/dist/image/pic.jpg");
-        String result = HttpUrlContextUtils.getResponseText("http://nba.sports.sina.com.cn/team/Spurs.shtml", null, "gb2312");
+        String result = HttpUrlContextUtils.getResponseText("http://nba.sports.sina.com.cn/star/John-Lucas III.shtml", null, "gb2312");
         System.out.println(result);
     }
 
@@ -55,7 +60,7 @@ public class HttpUrlContextUtils {
     public static String getResponse(String path,RequestType requestType,String params,String encoding) {
         HttpURLConnection connection = null;
         try {
-            connection = setConnection(path, connection, requestType, params);
+            connection = setConnection(path, connection, requestType, params,encoding);
             return readTextContext(connection.getInputStream(), encoding);
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,14 +70,14 @@ public class HttpUrlContextUtils {
         return null;
     }
 
-    public static byte[] getResponseBytes(String path) throws Exception {
-        return getResponseBytes(path, null);
+    public static byte[] getResponseBytes(String path,String encoding) throws Exception {
+        return getResponseBytes(path, null,encoding);
     }
 
-    public static byte[] getResponseBytes(String path,String params) throws Exception {
+    public static byte[] getResponseBytes(String path,String params,String encoding) throws Exception {
         HttpURLConnection connection = null;
         try {
-            connection = setConnection(path, connection, RequestType.GET, params);
+            connection = setConnection(path, connection, RequestType.GET, params,encoding);
             return IOStreamUtils.readInputStreamToBytes(connection.getInputStream());
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,11 +87,16 @@ public class HttpUrlContextUtils {
         return null;
     }
 
-    public static HttpURLConnection setConnection(String path,HttpURLConnection connection,RequestType requestType,String params) throws IOException {
-        URL url = new URL(path);
+    public static HttpURLConnection setConnection(String path,
+                                                  HttpURLConnection connection,
+                                                  RequestType requestType,
+                                                  String params,
+                                                  String encoding) throws IOException {
+        URL url = new URL(encode(path,encoding));
+
         connection = (HttpURLConnection)url.openConnection();
-        connection.setConnectTimeout(2000); // 设置连接超时时间，单位毫秒
-        connection.setReadTimeout(2000);    // 设置读取数据超时时间，单位毫秒
+        connection.setConnectTimeout(15000); // 设置连接超时时间，单位毫秒
+        connection.setReadTimeout(15000);    // 设置读取数据超时时间，单位毫秒
         connection.setDoInput(true);        // 是否打开输出 true|false
         connection.setDoOutput(true);       // 是否打开输入流true|false
         connection.setRequestMethod(requestType.toString());// 提交方法POST|GET
@@ -103,6 +113,18 @@ public class HttpUrlContextUtils {
         return connection;
     }
 
+    public static String encode(String str, String encoding)
+            throws UnsupportedEncodingException {
+        str = str.replaceAll(" ", "+");// 对空字符串进行处理
+        Pattern p = Pattern.compile(zhPattern);
+        Matcher m = p.matcher(str);
+        StringBuffer buffer = new StringBuffer();
+        while (m.find()) {
+            m.appendReplacement(buffer, URLEncoder.encode(m.group(0), encoding));
+        }
+        m.appendTail(buffer);
+        return buffer.toString();
+    }
 
     /**
      * 字符转码

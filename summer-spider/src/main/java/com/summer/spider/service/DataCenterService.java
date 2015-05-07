@@ -24,6 +24,9 @@ public class DataCenterService {
     @Autowired
     PlayerService playerService;
 
+    @Autowired
+    PlayerSessionStatsService playerSessionStatsService;
+
     private static final String entryUrl = "http://nba.sports.sina.com.cn/teams.php?dpc=1";
 
     DataCenterParser parser;
@@ -42,6 +45,7 @@ public class DataCenterService {
         divisionService.saveEntities(parser.getDivisions());
         teamService.saveEntities(parser.getTeams());
         playerService.saveEntities(parser.getPlayers());
+        playerSessionStatsService.saveEntities(parser.getPlayerSeasonStatses());
     }
 
 

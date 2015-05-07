@@ -52,7 +52,7 @@ public class RegexUtils {
 
     /**
      * 获得括号里的字符串
-     * */
+     */
     public static String getBracketsData(String input) {
         String result = getSingleMatchData("\\(.*?\\)",input);
         return result.substring(1,result.length()-1);

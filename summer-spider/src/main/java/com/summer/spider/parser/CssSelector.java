@@ -37,4 +37,8 @@ public class CssSelector {
 
     }
 
+    public class Player {
+        public final static String englishName = "div:eq(0) p";
+    }
+
 }

@@ -11,18 +11,18 @@ import java.util.Date;
 @MappedSuperclass
 public abstract class Person extends NamedEntity {
 
-    private Date Birthday;
+    private Date birthday;
 
     private double height;
 
     private double weight;
 
     public Date getBirthday() {
-        return Birthday;
+        return birthday;
     }
 
     public void setBirthday(Date birthday) {
-        Birthday = birthday;
+        this.birthday = birthday;
     }
 
     public double getHeight() {

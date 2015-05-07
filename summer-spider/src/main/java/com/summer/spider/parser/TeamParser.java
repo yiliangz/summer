@@ -1,6 +1,7 @@
 package com.summer.spider.parser;
 
 import com.google.common.collect.Lists;
+import com.summer.common.constant.EncodingConstant;
 import com.summer.common.utils.DateUtils;
 import com.summer.common.utils.IOStreamUtils;
 import com.summer.common.utils.RegexUtils;
@@ -52,11 +53,9 @@ public class TeamParser extends HtmlParser{
     }
 
     public void parseCoach(String teamName,Elements coachElement) {
-        System.out.println(coachElement.html());
-        System.out.println(FilePathUtils.getPrefixImagePath()+"/team/coach/");
-        String filePath = FilePathUtils.getPrefixImagePath()+"/team/coach/" + teamName + ".jpg";
+        String filePath = FilePathUtils.getPrefixImagePath()+"/coach/" + teamName + ".jpg";
         filePath = filePath.replaceAll("\\s","_").toLowerCase();
-        IOStreamUtils.saveFile(coachElement.select("img").attr("src"),filePath);
+        IOStreamUtils.saveFile(coachElement.select("img").attr("src"),filePath, EncodingConstant.GB_ENCODING);
     }
 
     public void parsePlayers() {

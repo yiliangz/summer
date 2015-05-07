@@ -12,7 +12,7 @@ import java.util.List;
  */
 /* 分区: 现在一共6个 */
 @Entity
-@Table(name = "division")
+@Table(name = "Division")
 public class Division extends NamedEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)

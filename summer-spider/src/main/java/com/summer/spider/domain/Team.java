@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Entity
 @DynamicUpdate(value = true)
-@Table(name = "team")
+@Table(name = "Team")
 public class Team extends NamedEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -35,9 +35,6 @@ public class Team extends NamedEntity {
     private String url;
 
     private long joinYear;
-
-    /* 英文缩写 */
-    private String abbr;
 
     @OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
     @JsonBackReference

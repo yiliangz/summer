@@ -1,5 +1,6 @@
 package com.summer.test.spider.parser;
 
+import com.summer.spider.domain.PlayerSeasonStats;
 import com.summer.spider.repository.DivisionRepository;
 import com.summer.spider.service.*;
 import org.junit.runner.RunWith;
@@ -28,5 +29,8 @@ public class BaseSpringContext {
 
     @Autowired
     DataCenterService dataCenterService;
+
+    @Autowired
+    PlayerSessionStatsService playerSessionStatsService;
 
 }

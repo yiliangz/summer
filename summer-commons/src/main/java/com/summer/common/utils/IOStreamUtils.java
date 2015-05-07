@@ -31,6 +31,9 @@ public class IOStreamUtils {
         FileOutputStream outStream = null;
         try {
             File file = new File(filePath);
+            if (file.exists()) {
+                return;
+            }
             outStream = new FileOutputStream(file);
             outStream.write(bytes);
         } catch (FileNotFoundException e) {
@@ -42,9 +45,9 @@ public class IOStreamUtils {
         }
     }
 
-    public static void saveFile(String urlPath,String filePath)  {
+    public static void saveFile(String urlPath,String filePath,String encoding)  {
         try {
-            saveByteFile(HttpUrlContextUtils.getResponseBytes(urlPath),filePath);
+            saveByteFile(HttpUrlContextUtils.getResponseBytes(urlPath,encoding),filePath);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -65,7 +68,6 @@ public class IOStreamUtils {
                 String lineTxt = null;
                 while ((lineTxt = bufferedReader.readLine()) != null) {
                     lineTxt.replaceAll("\\\"", "\"");
-                    System.out.println(lineTxt);System.out.println();
                     sb.append(lineTxt);
                 }
                 reader.close();
