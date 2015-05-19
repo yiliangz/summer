@@ -26,8 +26,6 @@ public abstract class HtmlParser implements DataParser {
 
     }
 
-    ;
-
     public HtmlParser init(Element content) {
         this.content = content;
         return this;

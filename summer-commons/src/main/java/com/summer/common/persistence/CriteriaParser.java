@@ -30,6 +30,7 @@ public class CriteriaParser {
      */
     public static Criteria parse(List<SearchFilter> filters, Class entityClass, Session session) {
         Criteria criteria = session.createCriteria(entityClass);
+
         for (SearchFilter filter : filters) {
 
             String field = filter.getField();
@@ -142,7 +143,7 @@ public class CriteriaParser {
     }
 
     /**
-    * 查找subcriteria,找不到时则查找最接近它的父辈
+    * 查找subcriteria,找不到时则递归查找最接近它的父辈
     * @param criteria
     * @param names
     * @param index

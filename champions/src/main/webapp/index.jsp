@@ -7,16 +7,29 @@
     </script>
     <script type="text/javascript">
 
-        function all() {
-            $.ajax({
-                url:"/player/all",
-                type:"get",
-                contentType: "application/json",
-                dataType:"json",
-                success: function(){
+        function get(url, params) {
+            request(url, params, "get");
+        }
 
+        function post(url, params) {
+            request(url, params, "post");
+        }
+
+        function request(url, params, type) {
+            $.ajax({
+                url: url,
+                type: type,
+                data:JSON.stringify(params),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (data) {
+                    $("body").append(JSON.stringify(data));
                 }
             });
+        }
+
+        function all() {
+            get("/player/all",null);
         }
 
         function page() {
@@ -30,38 +43,21 @@
                     "birthPlace": "asc"
                 }
             };
-            $.ajax({
-                url:"/player/page",
-                type:"post",
-                contentType: "application/json",
-                data:JSON.stringify(params),
-                dataType:"json",
-                success: function(){
-
-                }
-            });
+            post("/player/page",params);
         }
 
         function update() {
             var params = {
                 city: "san antonio"
             };
-            $.ajax({
-                url:"/team/update/1",
-                type:"post",
-                contentType: "application/json",
-                data:JSON.stringify(params),
-                dataType:"json",
-                success: function(){
-
-                }
-            });
+            post(url,params);
         }
 
         page();
 
 //        update();
 
+//        all();
     </script>
 </body>
 </html>

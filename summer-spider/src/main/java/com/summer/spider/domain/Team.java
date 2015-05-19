@@ -96,4 +96,12 @@ public class Team extends NamedEntity {
         this.champions = champions;
     }
 
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
 }

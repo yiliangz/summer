@@ -2,6 +2,8 @@ package com.summer.spider.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.summer.common.extend.Person;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 
@@ -12,7 +14,7 @@ import javax.persistence.*;
 @Table(name = "Player")
 public class Player extends Person {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "teamId")
     @JsonManagedReference
     private Team team;
