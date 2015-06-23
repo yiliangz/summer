@@ -20,11 +20,6 @@
     <dependencies>
         <dependency>
             <groupId>com.summer</groupId>
-            <artifactId>summer-config</artifactId>
-            <version>${summer.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.summer</groupId>
             <artifactId>summer-commons</artifactId>
             <version>${summer.version}</version>
         </dependency>
